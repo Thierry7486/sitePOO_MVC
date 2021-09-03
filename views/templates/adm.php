@@ -11,7 +11,7 @@
     <title><?=\App\Config::getTitle()?></title>
   </head>
   <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-warning">
   <div class="container-fluid">
     <a class="navbar-brand" href="?p=home"><img src="./images/Thierry.jpg" alt="logo" height="40" width="auto"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,7 +53,7 @@
   <?=$view_content?>  
   <!-- END VIEW CONTENT HERE !!! -->
 </div>
-<footer class="bg-light text-center">
+<footer class="bg-warning text-center">
   <h4>Footer</h4>
 </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>

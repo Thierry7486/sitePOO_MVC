@@ -8,7 +8,7 @@ App\Autoloader::register();
 // la page à afficher
 $p = isset($_GET['p']) ? $_GET['p'] : "home";
 // On détermine le parcours pour afficher la vue
-$view = is_file("../views/$p.php") ? "../views/$p.php" : "../views/404.php";
+$view = is_file("../views/pages/$p.php") ? "../views/pages/$p.php" : "../views/pages/404.php";
 
 // on se connecte à la database
 
