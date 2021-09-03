@@ -9,11 +9,15 @@ App\Autoloader::register();
 $p = isset($_GET['p']) ? $_GET['p'] : "home";
 
 // Authentication 
+session_start();
 $auth = new \App\Auth\DbAuth();
 if (!$auth->logged()) {
-	header("HTTP/1.0 401 Unauthorized");
-	die("Not authorized !");
+	// header("HTTP/1.0 401 Unauthorized");
+	// die("Not authorized !");
+	$p = "login";
+	$form = new \App\HTML\BootstrapForm($_POST);
 }
+
 
 // On détermine le parcours pour afficher la vue
 $view = is_file("../views/admin/$p.php") ? "../views/admin/$p.php" : "../views/pages/404.php";
@@ -23,6 +27,15 @@ $view = is_file("../views/admin/$p.php") ? "../views/admin/$p.php" : "../views/p
 // On fait une requête sur la DB en fonction de la route
 
 switch ($p) {
+	case "login":
+		if(!empty($_POST)){
+			$user = $auth->login($_POST["email"],$_POST["password"]);
+			if(is_object($user)){
+				$_SESSION["auth"]=$user;
+			}
+		}
+
+		break;
 	case "home":
 	
 		break;
