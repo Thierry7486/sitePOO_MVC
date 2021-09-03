@@ -1,50 +1,65 @@
 <?php
+
 namespace App\Tables;
 
-class Posts{
+use \App\Config;
 
-	public static function getAll($db) { 
-		return $db->query("SELECT posts.*, categories.name as category
+class Posts extends Table
+{
+
+	public static function getAll()
+	{
+		return Config::getDb()->query("SELECT posts.*, categories.name as category
 		 FROM posts
 		 LEFT JOIN categories ON posts.category_id = categories.id
-		  ORDER BY id",__CLASS__);
+		  ORDER BY id", __CLASS__);
 	}
 
-	public function __get($key) {
-		$method = 'get'.ucfirst($key);
-		$this->$key = $this->$method();
-		return $this->$key;
+	public static function getPostsByCategory($cat_id)
+	{
+		return Config::getDb()->query("SELECT posts.*, categories.name as category
+		FROM posts
+		LEFT JOIN categories
+		 ON posts.category_id = categories.id
+		 WHERE posts.category_id = ? 
+		ORDER BY id DESC", __CLASS__, [$cat_id]);
 	}
 
-	public function getExcerpt(){
-		return substr($this->text,0,120)." <a href='".$this->url."'>[...]</a>";
+	public function getExcerpt()
+	{
+		return substr($this->text, 0, 120) . " <a href='" . $this->url . "'>[...]</a>";
 	}
 
-	public function getId(){
+	public function getId()
+	{
 		return $this->id;
 	}
 
-	public function getTitle(){
+	public function getTitle()
+	{
 		return $this->title;
 	}
 
-	public function getText(){
+	public function getText()
+	{
 		return $this->text;
 	}
 
-	public function getImage(){
+	public function getImage()
+	{
 		return $this->image;
 	}
 
-	public function getImg(){
-		if(is_file("./images/".$this->image)){
+	public function getImg()
+	{
+		if (is_file("./images/" . $this->image)) {
 			return $this->image;
 		}
 		return "default.jpg";
 	}
 
-	public function getUrl(){
-		return "?p=single&id=".$this->id;
+	public function getUrl()
+	{
+		return "?p=single&id=" . $this->id;
 	}
-
 }

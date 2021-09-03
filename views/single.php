@@ -11,9 +11,12 @@
 	<div class="card-body">
 		<h5 class="card-title"><?= $posts[0]->title ?></h5>
 		<p class="card-text"><?= $posts[0]->text ?></p>
-		<a href="?p=home#post<?= $posts[0]->id ?>" class="btn btn-primary">Go back</a>
+		<a href="<?=$_SERVER['HTTP_REFERER']?>" class="btn btn-primary">Go back</a>
 	</div>
 	<div class="card-footer text-muted">
 		<?= $posts[0]->date ?>
 	</div>
 </div>
+
+<!-- Pour faire un retour en arrière sur un bouton par exemple, on peut utiliser $_SERVER['HTTP_REFERER'] en php
+ou en href="javascript:history.back()" -->
