@@ -14,13 +14,16 @@ $view = is_file("../views/$p.php") ? "../views/$p.php" : "../views/404.php";
 $db =  \App\Config::getDb();
 // On fait une requête sur la DB en fonction de la route
 
-switch ($p){
+switch ($p) {
 	case "home":
-		$posts = $db->query("SELECT * FROM posts ORDER BY id","App\Tables\Posts");
+		$posts = \App\Tables\Posts::getAll($db);
 		break;
 	case "single":
-		$id = isset($_GET['id']) && ((int)$_GET['id']*1)>0 ? $_GET['id'] : 27;
-		$posts = $db->query("SELECT * FROM posts WHERE id=?","App\Tables\Posts",[$id]);
+		$id = isset($_GET['id']) && ((int)$_GET['id'] * 1) > 0 ? $_GET['id'] : 27;
+		$posts = $db->query("SELECT * FROM posts WHERE id=?", "App\Tables\Posts", [$id]);
+		break;
+	case "categories":
+		$categories = \App\Tables\Categories::getAll();
 		break;
 }
 

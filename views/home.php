@@ -7,7 +7,7 @@
 			<div class="card" id="post<?= $post->id ?>">
 				<img src="<?= "./images/".$post->img ?>" alt="Images">
 				<div class="card-body">
-					<h5 class="card-title"><?= $post->title ?></h5>
+					<h5 class="card-title"><?= $post->title ?> - <?= $post->category ?></h5>
 					<p class="card-text text-truncate"><?= $post->text ?></p>
 					<p class="card-text"><?= $post->date ?></p>
 					<a href="<?= $post->url ?>" class="btn btn-primary">Read More</a>

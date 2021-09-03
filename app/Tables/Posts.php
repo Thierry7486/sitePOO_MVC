@@ -3,6 +3,13 @@ namespace App\Tables;
 
 class Posts{
 
+	public static function getAll($db) { 
+		return $db->query("SELECT posts.*, categories.name as category
+		 FROM posts
+		 LEFT JOIN categories ON posts.category_id = categories.id
+		  ORDER BY id",__CLASS__);
+	}
+
 	public function __get($key) {
 		$method = 'get'.ucfirst($key);
 		$this->$key = $this->$method();
