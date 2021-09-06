@@ -1,59 +1,46 @@
 <?php
 require "../app/Autoloader.php";
 App\Autoloader::register();
+// On test l'autoload
 
-// On teste l'autoload
-// App\Utils::print_r_pre($_GET);
-// On récupère la var p pour déterminer
+// on récup la var p pour déterminer  
 // la page à afficher
 $p = isset($_GET['p']) ? $_GET['p'] : "home";
 
-// Authentication 
 session_start();
+//Authentification
+if ($p==="logout"){
+    session_unset();
+    // session_destroy(); => redondant par rapport à session_unset();
+    //header("Location:./");      
+}
 $auth = new \App\Auth\DbAuth();
 if (!$auth->logged()) {
-	// header("HTTP/1.0 401 Unauthorized");
-	// die("Not authorized !");
-	$p = "login";
-	$form = new \App\HTML\BootstrapForm($_POST);
+    $p = "login";
 }
 
 
 // On détermine le parcours pour afficher la vue
 $view = is_file("../views/admin/$p.php") ? "../views/admin/$p.php" : "../views/pages/404.php";
 
-// on se connecte à la database
-
-// On fait une requête sur la DB en fonction de la route
-
+// On fait une requète sur la DB en fonction de la route
 switch ($p) {
-	case "login":
-		if(!empty($_POST)){
-			$user = $auth->login($_POST["email"],$_POST["password"]);
-			if(is_object($user)){
-				$_SESSION["auth"]=$user;
-			}
-		}
-
-		break;
-	case "home":
-	
-		break;
-	case "single":
-		
-		break;
-	case "categories":
-		
-		break;
-	case "category":
-		
-		break;
+    case "login":
+        
+        break;
+    case "home":
+        break;
+    case "single":
+        break;
+    case "categories":
+        break;
+    case "category":
+        break;
 }
-
 
 // On charge la vue dans la mémoire tampon
 ob_start();
 require $view;
 $view_content = ob_get_clean();
-// On charge le template qui va rendre le contenu souhaité
+// On charge le template qui va contenir le rendu souhaité
 require "../views/templates/adm.php";
